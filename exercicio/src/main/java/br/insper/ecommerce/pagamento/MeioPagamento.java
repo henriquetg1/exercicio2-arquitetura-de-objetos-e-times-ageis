@@ -30,4 +30,5 @@ public class MeioPagamento {
     public void setDataAprovacao(LocalDateTime dataAprovacao) {
         this.dataAprovacao = dataAprovacao;
     }
+
 }

@@ -20,9 +20,9 @@ public class Compra {
     public Compra() {
     }
 
-    public Compra(LocalDateTime dataCompra, Double precoTotal, Cliente cliente, MeioPagamento meioPagamento) {
+    public Compra(LocalDateTime dataCompra, ArrayList<Item> listaItens, Cliente cliente, MeioPagamento meioPagamento) {
         this.dataCompra = dataCompra;
-        this.precoTotal = precoTotal;
+        this.itens = listaItens;
         this.cliente = cliente;
         this.meioPagamento = meioPagamento;
     }
@@ -68,4 +68,11 @@ public class Compra {
         this.meioPagamento = meioPagamento;
     }
 
+    public ArrayList<Item> getItens() {
+        return itens;
+    }
+    // Quando finaliza a compra
+    public void limparItens() {
+        itens.clear();
+    }
 }
