@@ -13,7 +13,6 @@ import br.insper.ecommerce.produto.Produto;
 import br.insper.ecommerce.produto.ProdutoService;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -24,7 +23,6 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        ArrayList<Cliente> clientes = new ArrayList<>();
         String opcao = "0";
 
         ClienteService clienteService = new ClienteService();
@@ -140,30 +138,41 @@ public class Main {
                                         System.out.println("Digite o QR CODE:");
                                         String qrCode = scanner.nextLine();
                                         compra.setMeioPagamento(new Pix(true, LocalDateTime.now(), chaveOrigem, qrCode));
+                                        compra.setCliente(cliente); // Define o cliente da compra
+                                        compraService.registrarCompra(compra); // Registra a compra
+                                        compra.limparItens();
+                                        System.out.println("Compra finalizada. Obrigado!");
                                     } else if (meioPagamento.equalsIgnoreCase("2")) {
                                         System.out.println("Digite o número do cartão:");
                                         String numeroCartao = scanner.nextLine();
                                         System.out.println("Digite a bandeira do cartão:");
                                         String bandeira = scanner.nextLine();
                                         compra.setMeioPagamento(new CartaoCredito(true, LocalDateTime.now(), numeroCartao, bandeira));
+                                        compra.setCliente(cliente); // Define o cliente da compra
+                                        compraService.registrarCompra(compra); // Registra a compra
+                                        compra.limparItens();
+                                        System.out.println("Compra finalizada. Obrigado!");
                                     } else if (meioPagamento.equalsIgnoreCase("3")) {
                                         System.out.println("Digite o número do cartão:");
                                         String numeroCartao = scanner.nextLine();
                                         System.out.println("Digite a bandeira do cartão:");
                                         String bandeira = scanner.nextLine();
                                         compra.setMeioPagamento(new CartaoDebito(true, LocalDateTime.now(), numeroCartao, bandeira));
+                                        compra.setCliente(cliente); // Define o cliente da compra
+                                        compraService.registrarCompra(compra); // Registra a compra
+                                        compra.limparItens();
+                                        System.out.println("Compra finalizada. Obrigado!");
                                     } else if (meioPagamento.equalsIgnoreCase("4")) {
                                         System.out.println("Digite o código de barra:");
                                         String codigoBarra = scanner.nextLine();
                                         compra.setMeioPagamento(new Boleto(true, LocalDateTime.now(), codigoBarra));
+                                        compra.setCliente(cliente); // Define o cliente da compra
+                                        compraService.registrarCompra(compra); // Registra a compra
+                                        compra.limparItens();
+                                        System.out.println("Compra finalizada. Obrigado!");
                                     } else {
                                         System.out.println("Meio de pagamento inválido.");
                                     }
-
-                                    compra.setCliente(cliente); // Define o cliente da compra
-                                    compraService.registrarCompra(compra); // Registra a compra
-                                    compra.limparItens();
-                                    System.out.println("Compra finalizada. Obrigado!");
                                 } else {
                                     System.out.println("Cliente não encontrado.");
                                 }
